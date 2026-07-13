@@ -90,5 +90,5 @@ server.post("/products", (req, res) => {
 });
 
 server.listen(4001, () => {
-  console.log(`july server is running on port 4001`);
+  console.log(`jul server is running on port 4001`);
 });
