@@ -1,7 +1,12 @@
 import express, { json } from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+dotenv.config();
 
 const server = express();
 server.use(json());
+
+const port = process.env.PORT;
 
 const product = [
   {
@@ -89,6 +94,8 @@ server.post("/products", (req, res) => {
   res.send(product);
 });
 
-server.listen(4001, () => {
-  console.log(`jul server is running on port 4001`);
+connectDB();
+
+server.listen(port, () => {
+  console.log(`jul server is running on port ${port}`);
 });
