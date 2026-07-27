@@ -1,19 +1,20 @@
 import express, { json } from "express";
-import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import productRoute from "./routes/product.js";
-dotenv.config();
+import userRoute from "./routes/user.js";
+import { envObj } from "./config/env.js";
 
 const server = express();
 server.use(json());
 
-const port = process.env.PORT;
+const port = envObj.port;
 
 server.get("/", (req, res) => {
   res.send("Hello, Welcome to our server");
 });
 
 server.use("/products", productRoute);
+server.use("/auth", userRoute);
 
 // server.get("/products", (req, res) => {
 //   res.send(product);
