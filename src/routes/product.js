@@ -6,13 +6,14 @@ import {
   getSinglePRoduct,
   updateProduct,
 } from "../controllers/product.js";
+import { jwtValidator } from "../middleware/vallidate.js";
 
 const route = express.Router();
 
-route.post("/", addProduct);
+route.post("/", jwtValidator, addProduct); //this
 route.get("/", getAllProduct);
 route.get("/:id", getSinglePRoduct);
-route.delete("/:id", deleteProduct);
-route.put("/:id", updateProduct);
+route.delete("/:id", jwtValidator, deleteProduct); //this
+route.put("/:id", jwtValidator, updateProduct); //this
 
 export default route;

@@ -1,6 +1,7 @@
 import { envObj } from "../config/env.js";
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import { generateToken } from "../utils/jwt.js";
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -32,9 +33,14 @@ export const login = async (req, res) => {
       email: user.email,
     };
 
-    return res
-      .status(200)
-      .json({ status: true, message: "Login successfully", user: userObj });
+    const token = generateToken(user._id);
+
+    return res.status(200).json({
+      status: true,
+      message: "Login successfully",
+      user: userObj,
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ status: false, message: error.message });
