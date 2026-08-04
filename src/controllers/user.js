@@ -85,3 +85,30 @@ export const register = async (req, res) => {
     res.status(400).json({ status: false, message: error.message });
   }
 };
+
+export const authMe = async (req, res) => {
+  try {
+    console.log(req.user);
+
+    const user = await User.findById(req.user.userId);
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ status: false, message: "Invalid Credentials" });
+    }
+
+    const userObj = {
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
+
+    return res
+      .status(200)
+      .json({ status: true, message: "successfully", user: userObj });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ status: false, message: error.message });
+  }
+};

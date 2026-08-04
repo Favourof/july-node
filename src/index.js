@@ -3,9 +3,19 @@ import connectDB from "./config/db.js";
 import productRoute from "./routes/product.js";
 import userRoute from "./routes/user.js";
 import { envObj } from "./config/env.js";
+import cors from "cors";
 
 const server = express();
+const allowedOrigin = envObj.origin ? envObj.origin.split(",") : [];
+console.log(allowedOrigin);
+
+server.use(
+  cors({
+    origin: allowedOrigin,
+  }),
+);
 server.use(json());
+console.log(envObj.origin);
 
 const port = envObj.port;
 

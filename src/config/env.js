@@ -7,4 +7,5 @@ export const envObj = {
   saltRound: process.env.SALT_ROUND,
   jwtSecretKey: process.env.JWT_SECRECT_KEY,
   expireIn: process.env.EXPIRE_IN,
+  origin: process.env.ORIGIN,
 };
