@@ -2,6 +2,7 @@ import express, { json } from "express";
 import connectDB from "./config/db.js";
 import productRoute from "./routes/product.js";
 import userRoute from "./routes/user.js";
+import cartRoute from "./routes/cart.js";
 import { envObj } from "./config/env.js";
 import cors from "cors";
 
@@ -25,6 +26,7 @@ server.get("/", (req, res) => {
 
 server.use("/products", productRoute);
 server.use("/auth", userRoute);
+server.use("/cart", cartRoute);
 
 // server.get("/products", (req, res) => {
 //   res.send(product);
