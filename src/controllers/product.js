@@ -2,9 +2,11 @@ import Product from "../models/products.js";
 export const addProduct = async (req, res) => {
   try {
     //   console.log("hello add product is working");
-    const { title, description, price, category, currency, image } = req.body;
+    const { title, description, price, category, currency } = req.body;
+    const file = req.file;
+    console.log(file);
 
-    if (!title || !description || !price || !image) {
+    if (!title || !description || !price || !file) {
       res
         .status(400)
         .json({ status: false, message: "All Field are Required" });

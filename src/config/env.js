@@ -8,4 +8,7 @@ export const envObj = {
   jwtSecretKey: process.env.JWT_SECRECT_KEY,
   expireIn: process.env.EXPIRE_IN,
   origin: process.env.ORIGIN,
+  cloudName: process.env.CLOUD_NAME,
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET
 };
