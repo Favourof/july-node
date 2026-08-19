@@ -1,3 +1,4 @@
+import cloudinary from "../config/cloudinary.js";
 import Product from "../models/products.js";
 export const addProduct = async (req, res) => {
   try {
@@ -11,12 +12,47 @@ export const addProduct = async (req, res) => {
         .status(400)
         .json({ status: false, message: "All Field are Required" });
     }
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "july-product" },
+      async (error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(400).json({
+            status: false,
+            message: "Image upload failed",
+            error: error.message,
+          });
+        }
+
+        console.log(result);
+
+        try {
+          const productData = {
+            ...req.body,
+            image: result.secure_url,
+            imageId: result.public_id,
+          };
+
+          const product = await Product.create(productData);
+          res.status(201).json({
+            status: true,
+            message: "Product Created Successfully",
+            product,
+          });
+        } catch (error) {
+          console.log(error);
+          res.status(400).json({ status: false, message: error.message });
+        }
+      },
+    );
+
+    stream.end(req.file.buffer);
 
     // const product = await Product.create({title, description, price, category, currency, image})
-    const product = await Product.create(req.body);
-    res
-      .status(201)
-      .json({ status: true, message: "Product Created Successfully", product });
+    // const product = await Product.create(req.body);
+    // res
+    //   .status(201)
+    //   .json({ status: true, message: "Product Created Successfully", product });
   } catch (error) {
     console.log(error);
     res.status(400).json({ status: false, message: error.message });

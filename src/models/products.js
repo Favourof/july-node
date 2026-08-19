@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imageId: {
+    type: String,
+    required: true,
+  },
   currency: {
     type: String,
     enum: ["dollar", "pounds", "naira"],
