@@ -10,5 +10,5 @@ export const envObj = {
   origin: process.env.ORIGIN,
   cloudName: process.env.CLOUD_NAME,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
-  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
 };

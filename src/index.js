@@ -12,7 +12,7 @@ console.log(allowedOrigin);
 
 server.use(
   cors({
-    origin: allowedOrigin,
+    origin: ["http://localhost:5173", "http://localhost:5174"],
   }),
 );
 server.use(json());
